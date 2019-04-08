@@ -1,0 +1,318 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15-03-2019, 23:04:20
+    Author     : LENOVO
+*/
+#contenedor #inicio{
+    position: absolute;
+    width: 1000px;
+    height: 500px;
+    top: 0px;
+    left: 0px;
+    background-image: url(../img/intro/inicio.svg);
+    font-family: 'Patrick Hand', cursive;
+}
+
+#contenedor #inicio #cerrarSesion a{
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    color: white;
+    top: -25px;
+}
+
+#contenedor #inicio #saludo{
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    width: 1000px;
+    margin-left: -500px;
+    color: white;
+}
+
+#contenedor #inicio .niveles{
+    float: left;
+    position: relative;
+    width: 33.33%;
+    height: -300px;
+    margin-top: 200px;
+    text-align: center;
+}
+
+#contenedor #inicio .puntaje{
+    position: absolute;
+    top: -120px;
+    left: 50px;
+    width: 100%;
+    margin-left: -50px;
+    color: white;
+    font-size: 20px;
+}
+
+#contenedor #inicio .niveles button{
+    display: block;
+    width: 100px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 0px;
+    background: #131C17;
+    color: white;
+    font-size: 10px;
+    border-radius:  10px 0 10px 0;
+    cursor: pointer;
+    font-family: 'Patrick Hand', cursive;
+}
+
+
+#contenedor #inicio .niveles button:hover{
+    width: 120px;
+    margin: 15px 0;
+    transition: all .1s;
+}
+
+#contenedor #inicio .niveles button:active{
+    background: green;
+}
+/* ********************
+LIENZO CANVAS
+******************** */
+#lienzo{
+    /*width: 1000px; El lienzo al ser un objeto cambas se deben configurar el ancho y el alto en el HTML*/
+    /*height: 500px; El lienzo al ser un objeto cambas se deben configurar el ancho y el alto en el HTML*/
+    display: none;
+}
+
+/* ************** TAMAÑO DEL JUEGO ******************** */
+#btnAmpliar{
+    display: none;
+    font-family: "Patrick Hand", cursive;
+    position: relative;
+    width: 150px;
+    padding: 10px 5px; /* 10 horizontal 5 vertica*/
+    background: green;
+    color: white;
+    text-align: center;
+    line-height: 10px;
+    border-radius: 0px 0px 10px 0px; /* izq superior, derecha superior, derecha inferior, izquierda inferior  */
+    cursor: pointer;
+}
+
+#btnFullScreen{
+    display: none;
+    font-family: "Patrick Hand", cursive;
+    position: relative;
+    width: 200px;
+    padding: 10px 5px; /* 10 horizontal 5 vertica*/
+    background: green;
+    color: white;
+    text-align: center;
+    line-height: 10px;
+    border-radius: 0px 0px 0px 10px; /* izq superior, derecha superior, derecha inferior, izquierda inferior  */
+    cursor: pointer;
+    
+    left: 79%;
+    top: -30px;
+}
+
+/* ***********************************
+TABLERO
+********************************** */
+#tablero{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1000px;
+    height: 60px;
+    background: rgba(0,0,0,.5);
+    font-family: "Patrick Hand", cursive;
+}
+
+#vidas{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 220px;
+    height: 60px;
+    color: white;
+    font-size: medium;
+}
+
+#vidas p{
+    float: left;
+    line-height: 60px;
+    padding-left: 10px;
+    width: 50px;
+    font-weight: bold;
+}
+
+#vidas ul{
+    float: left;
+    width: 140px;
+    height: 70px;
+    margin-left: 10px;
+}
+
+#vidas ul li{
+    margin: 8px 2px;
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    line-height: 40px;
+    background: rgba(255,255,255,.5);
+    text-align: center;
+}
+
+#vidas ul li img{
+    padding-top: 7px;
+    width: 60%;
+}
+
+/* ***********************************
+ENERGÍA
+********************************** */
+#energia{
+    position: absolute;
+    top:0px;
+    left: 220px;
+    width: 400px;
+    height: 60px;
+    color: white;
+    font-size: medium;
+    line-height: 60px;
+}
+
+#energia p{
+    float:left;
+    line-height: 60px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+#barraEnergia{
+    float:left;
+    margin-top: 20px;
+    width: 190px;
+    padding-left: 10px;
+}
+
+#energia span{
+    padding-left: 10px;
+}
+
+/* ***********************************
+MONEDAS
+********************************** */
+#monedas{
+    position: absolute;
+    top: 0px;
+    left: 560px;
+    width: 200px;
+    height: 60px;
+    color: white;
+    font-size: medium;
+}
+
+#monedas p{
+    float:left;
+    line-height: 60px;
+    padding-left: 20px;
+    width: 90px;
+    font-weight: bold;
+}
+
+#monedas span{
+    float: left;
+    line-height: 60px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+#spriteMonedas{
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: url(../img/utileria/monedas.png);
+    background-position: 0px;
+    background-size: cover;
+}
+
+/* ***********************************
+AUDIO
+********************************** */
+#controlVolumen{
+    position: absolute;
+    top: 0px;
+    right: 80px;
+    width: 150px;
+    height: 60px;
+    color: white;
+    font-size: medium;
+}
+
+#controlVolumen p{
+    width: 90px;
+    line-height: 4;
+    font-weight: bold;
+    float: left;
+}
+
+#controlVolumen ul{
+    float: left;
+    /*width: 65px;*/
+    height: 70px;
+    /*margin-left: 30px;*/
+}
+
+#controlVolumen ul li{
+    float:left;
+    width: 8px;
+    height: 20px;
+    background: white;
+    margin: 19px 3px;
+    cursor: pointer;
+}
+
+#controlVolumen ul li:first-child{
+    height: 7px;
+    margin-top: 32px;
+}
+
+#controlVolumen ul li:nth-child(2){
+    height: 14px;
+    margin-top: 25px;
+}
+/* ***********************************
+AUDIO
+********************************** */
+#salida{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 80px;
+    height: 60px;
+    color: white;
+    font-size: medium;
+    text-align: center;
+}
+
+#salida button{
+    width: 50px;
+    font-weight: bold;
+    border: 0;
+    margin-top: 15px;
+    padding: 5px;
+    background: black;
+    color: white;
+    font-family: "Patrick Hand", cursive;
+    border-radius: 2px;
+}
+
+

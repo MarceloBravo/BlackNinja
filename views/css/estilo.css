@@ -1,0 +1,87 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    position: relative;
+    background-color: #172025;
+    background-image: url(../img/intro/back.svg);
+    background-repeat: repeat-x;
+    background-position: top;
+    overflow: hidden;
+}
+
+/* 
+######################## 
+MARCO
+######################## 
+*/
+#marco{
+	position:absolute;
+	width:1060px;
+	height:560px;
+	border-radius:10px 10px 0 0;
+	box-shadow:0px 5px 10px black;
+	background:#172025;
+	top:-30px;
+	left:50%;
+	margin-left:-530px;
+}
+
+/* 
+######################## 
+CONTENEDOR
+######################## 
+*/
+#contenedor{
+	position:relative;
+	margin:5vh auto;
+	width:1000px;
+	height:500px;
+	background:white;
+}
+/* 
+######################## 
+FOOTER
+######################## 
+*/
+footer{
+    position: relative;
+    padding: 8px;
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 5);
+    font-size: 12px;
+    color: #a0a1a2;
+}
+
+footer a{
+    color: white;
+}
+
+
+
+/* ********************************
+PRELOAD
+******************************** */
+#carga{
+    display: none;
+    position:absolute;
+    top:0;
+    left: 0;
+    width: 1000px;
+    height: 500px;
+    background: black;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    opacity: 1;
+    transition: opacity 1s ease;
+    font-family: "Patrick Hand", cursive;
+}
+
+#preload{
+    padding-top: 17%;
+}
