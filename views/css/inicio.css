@@ -221,7 +221,7 @@ MONEDAS
 #monedas p{
     float:left;
     line-height: 60px;
-    padding-left: 20px;
+    padding-left: 10px;
     width: 90px;
     font-weight: bold;
 }
@@ -236,7 +236,6 @@ MONEDAS
 #spriteMonedas{
     float: left;
     margin-top: 5px;
-    margin-left: 10px;
     width: 50px;
     height: 50px;
     background-image: url(../img/utileria/monedas.png);
@@ -313,6 +312,7 @@ AUDIO
     color: white;
     font-family: "Patrick Hand", cursive;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 

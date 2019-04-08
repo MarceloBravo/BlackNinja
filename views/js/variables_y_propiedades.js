@@ -57,12 +57,14 @@ var datos = {
     
     imgMonedas:[],
     posicionMonedas:[],
+    monedasColisionadas:[],
+    contadorMonedas:0,
     
     imgTrampas:[],
-    posicionTrampas:[],
-    
+    posicionTrampas:[],        
     movTrampa:-1,
     cambioMovTrampa:false, 
+    energiaTrampa:0.1,
     
     imgEnemigos:null,
     posicionEnemigos:[],
@@ -71,7 +73,8 @@ var datos = {
     posicionBalasEnemigos:[],
     movBalasEnemigos:0,
     velocidadBalasEnemigos:5,
-    cicloDisparoEnemigos:0, 
+    cicloDisparoEnemigos:0,
+    energiaBalas:0.3, 
 
     disparo: false,
     imgDisparoJugador:[],
@@ -86,6 +89,11 @@ var datos = {
     velocidadDisparoJugador:5,
     direccionDisparo:[],
     direccionJugador: "der",
-    disparoActivado:true
+    disparoActivado:true,
+
+    energia:0,
+    vida:3, 
+
+    gameOver: false
 };
 

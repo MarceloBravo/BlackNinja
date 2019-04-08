@@ -225,6 +225,8 @@ var inicio = {
                }
            }
         };
+
+        datos.monedasColisionadas=[];
         
         
         /* *********************************
@@ -273,6 +275,7 @@ var inicio = {
          ********************************* */   
         datos.imgJugador = new Image();
         datos.imgJugador.src = "views/img/jugador/stop_right.png";
+        datos.energia = 100;
         /*
          * El código de jugador es traladado al archivo lienzo.js
          * 
@@ -323,6 +326,8 @@ var inicio = {
                 document.getElementById("btnAmpliar").style.display = "block";
                 document.getElementById("btnFullScreen").style.display = "block";
                 document.getElementById("tablero").style.display = "block";
+
+                datos.gameOver = false;
                 
                 setTimeout(function(){
                     document.getElementById("carga").style.display = "none";

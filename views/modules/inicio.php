@@ -92,13 +92,13 @@ TABLERO
     <div id="vidas">
         <p>VIDAS: </p>
         <ul>
-            <li>
+            <li id="vida1">
                 <img src="views/img/utileria/vidas.png"/>
             </li>
-            <li>
+            <li id="vida2">
                 <img src="views/img/utileria/vidas.png"/>
             </li>
-            <li>
+            <li id="vida3">
                 <img src="views/img/utileria/vidas.png"/>
             </li>
         </ul>
@@ -109,14 +109,14 @@ TABLERO
     <div id="energia">
         <p>ENERGÍA: </p>
         <meter id="barraEnergia" value="100" max="100" min="0" high="40"></meter>
-        <span>100%</span>
+        <span id="porcentajeEnergia">100%</span>
     </div>
     <!-- ***********************************
     MONEDAS
     ************************************ -->
     <div id="monedas">
         <p>MONEDAS: </p>        
-        <span>0</span>
+        <span id="contadorMonedas">0</span>
         <div id="spriteMonedas">
             
         </div>
@@ -136,7 +136,7 @@ TABLERO
     SALIDA
     ************************************ -->
     <div id="salida">
-        <button>Salir</button>
+        <button onclick="juego.salir()">Salir</button>
     </div>
             
 </div>
@@ -149,6 +149,12 @@ PRELOAD
         <span id="infoPreload">0%</span>
         <meter id="medidorPorcentajeCarga" value="0" max="100" high="90"></meter> <!-- high indica en que velor cambiará de color la etiqueta meter -->
     </div>
+</div>
+<!-- ***********************************
+PRELOAD
+************************************ -->
+<div id="gameOver">
+    <h1>Game Over</h1>
 </div>
 
 

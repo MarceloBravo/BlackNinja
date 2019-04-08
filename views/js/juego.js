@@ -17,18 +17,18 @@ var juego = {
          * OPRIMIR TECLADO
          ************************* */
         tecla.preventDefault();
-        if (tecla.keyCode === 37) { //Flecha izquierda
+        if (tecla.keyCode === 37 && !datos.gameOver) { //Flecha izquierda
             datos.izquierda = true
             datos.direccionJugador = "izq";
         }; 
         
-        if (tecla.keyCode === 39) { //Flecha derecha
+        if (tecla.keyCode === 39 && !datos.gameOver) { //Flecha derecha
             datos.derecha = true;
             datos.direccionJugador = "der";
         };   
-        if (tecla.keyCode === 38) {datos.salto = true};  //Flecha hacia arriba
+        if (tecla.keyCode === 38 && !datos.gameOver) {datos.salto = true};  //Flecha hacia arriba
         
-        if (tecla.keyCode === 32) { //Barra espaciadorda
+        if (tecla.keyCode === 32 && !datos.gameOver) { //Barra espaciadorda
             if(datos.disparoActivado){
                 //datos.disparando = true;   
                 datos.imgDisparoJugador[datos.imgDisparoJugador.length] = new Image();
@@ -103,25 +103,38 @@ var juego = {
             datos.reiniciar = true
         }
         if (datos.reiniciar) {
-            datos.reiniciar = false;
-            datos.gravedad = 0;
-            datos.jugador_x = 70;
-            datos.jugador_y = 200;
-            datos.movimiento = 0;
-            datos.desplazamientoEscenario = 0;
-            datos.movimientoJugador = 0;
+            //document.getElementById("vida"+datos.vida).style.display = "none";
+            document.getElementById("vida"+datos.vida).innerHTML = "X";
+            if(datos.vida == 1 ){
+                //JUEGO TERMINADO NO QUEDAN VIDAS
+                juegoTerminado();
 
-            //RESETEANDO LAS PLATAFORMAS
+            }else{ 
+                datos.reiniciar = false;
+                datos.gravedad = 0;
+                datos.jugador_x = 70;
+                datos.jugador_y = 200;
+                datos.movimiento = 0;
+                datos.desplazamientoEscenario = 0;
+                datos.movimientoJugador = 0;
 
-            var xhrPlataforma = new XMLHttpRequest();
-            xhrPlataforma.open("GET", "views/js/json/nivel" + datos.nivel + "/plataforma.json", true);
-            xhrPlataforma.send();
+                datos.contadorMonedas = 0;                    
+                document.getElementById("contadorMonedas").innerHTML = datos.contadorMonedas;
+                datos.vida--;                
+                datos.energia = 100;
 
-            xhrPlataforma.onreadystatechange = function () {
-                if ((xhrPlataforma.readyState == 4) && (xhrPlataforma.status == 200)) {
-                    datos.plataforma = JSON.parse(xhrPlataforma.responseText);
-                }
-            };
+                //RESETEANDO LAS PLATAFORMAS
+
+                var xhrPlataforma = new XMLHttpRequest();
+                xhrPlataforma.open("GET", "views/js/json/nivel" + datos.nivel + "/plataforma.json", true);
+                xhrPlataforma.send();
+
+                xhrPlataforma.onreadystatechange = function () {
+                    if ((xhrPlataforma.readyState == 4) && (xhrPlataforma.status == 200)) {
+                        datos.plataforma = JSON.parse(xhrPlataforma.responseText);
+                    }
+                };
+            }
         }
 
 
@@ -290,6 +303,7 @@ var juego = {
             if (colisionesTrampas(i)) {
                 datos.imgTrampas[i].src = "views/img/utileria/colisionesTrampas.png";
                 datos.imgJugador.src = "views/img/jugador/colision_trampa.png";
+                datos.energia -= datos.energiaTrampa;
             } else {
                 datos.imgTrampas[i].src = "views/img/utileria/trampas.png";
             }
@@ -399,6 +413,13 @@ var juego = {
             if (colisionMonedas(i)) {
                 datos.imgMonedas[i].src = "views/img/utileria/colisionesMonedas.png";
                 datos.posicionMonedas[i].y--;    //La explosión de la moneda sube
+                
+                if(!datos.monedasColisionadas.includes(i)){
+                    datos.contadorMonedas+=10;
+                    document.getElementById("contadorMonedas").innerHTML = datos.contadorMonedas;
+                    datos.monedasColisionadas[datos.monedasColisionadas.length] = i;
+                }
+                
 
                 var moneda = i;
 
@@ -459,6 +480,7 @@ var juego = {
             if(colisionesBalas(index)){
                 datos.imgBalasEnemigos[index].src = "views/img/utileria/colisionesBalasEnemigos.png";
                 datos.imgJugador.src = "views/img/jugador/colision_trampa.png";
+                datos.energia -= datos.energiaBalas;            
                 setTimeout(function(){
                     datos.imgBalasEnemigos[index].src = "views/img/utileria/balasEnemigos.png";
                     datos.imgJugador.src = "views/img/jugador/stop_right.png";
@@ -545,6 +567,21 @@ var juego = {
 
             return true; //Colision entre balas
         }
+
+
+        /* **************************
+         * ACTUALIZANDO LA BARRA DE ENERGÍA
+         ************************* */
+        document.getElementById("barraEnergia").value = datos.energia;
+        document.getElementById("porcentajeEnergia").innerHTML = Math.round(datos.energia) + "%";
+
+        /* **************************
+         * ACTUALIZANDO VIDAS
+         ************************* */
+        if(datos.energia <=0){
+            datos.reiniciar = true;
+        }
+
         /* **************************
          * EJECUTANDO LÍNEA DE TIEMPO
          ************************* */
@@ -575,5 +612,23 @@ var juego = {
 
 
         }
+        
+        /* **************************
+         * GAME OVER
+         ************************* */
+        function juegoTerminado(){
+            cancelAnimationFrame(animacion);
+            document.getElementById("gameOver").style.display = "block";
+            datos.gameOver = true;
+            setTimeout(function(){
+                window.location.reload();
+            },5000)
+        }
+        
+    },
+
+    salir: function(){
+        window.location.reload();
     }
+
 };

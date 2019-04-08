@@ -85,3 +85,24 @@ PRELOAD
 #preload{
     padding-top: 17%;
 }
+
+/* ********************************
+GAME OVER
+******************************** */
+#gameOver{
+    position: absolute;
+    display: none;
+    top: 60px;
+    left: 0;
+    height: calc(100% - 60px);
+    width: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.52);
+    font-family: "Patrick Hand", cursive;
+    color: white;
+}
+
+#gameOver h1{
+    line-height: 440px;
+    text-align: center;
+}
