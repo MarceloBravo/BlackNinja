@@ -106,3 +106,65 @@ GAME OVER
     line-height: 440px;
     text-align: center;
 }
+
+/* ********************************
+FINAL NIVEL
+******************************** */
+#final{
+    display: none;
+    position: absolute;
+    top:0px;
+    left:0px;
+    height: 500px;
+    width: 1000px;
+    z-index:1;
+    background: rgba(0, 0, 0, 0.9);
+    font-family: "Patrick Hand", cursive;
+    color: white;
+}
+
+#final h1{
+    margin-top: 2px;
+    text-align: center;
+    font-size: 55px;
+}
+
+#final ul{
+    position: absolute;
+    width: 80%;
+    height: 200px;
+    top:50%;
+    left: 10%;
+}
+
+#final ul li{
+    float: left;
+    padding: 20px 0;
+    height: 150px;
+    width: 30%;
+    margin: 0px 1%;
+    text-align: center;
+    font-size: medium;
+    background: rgba(100,0,0,0.5);
+    border-radius: 20px;
+}
+
+#final #spriteMonedasFinal{
+    position: relative;
+    left: 50%;
+    margin-left: -40px;
+    width: 80px;
+    height: 80px;
+    background-image: url(../img/utileria/monedas.png);
+    background-position: 0px;
+    background-size: cover;
+}
+
+#final ul li ol li{
+    background: rgba(0, 0, 0, 0);
+    height: 45px;
+}
+
+#final ul li ol li img{
+    width: 60%;
+}

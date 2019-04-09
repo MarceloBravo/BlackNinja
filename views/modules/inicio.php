@@ -151,10 +151,69 @@ PRELOAD
     </div>
 </div>
 <!-- ***********************************
-PRELOAD
+GAME OVER
 ************************************ -->
 <div id="gameOver">
     <h1>Game Over</h1>
 </div>
+
+<!-- ***********************************
+FINAL NIVEL
+************************************ -->
+<div id="final">
+    <center>
+        <div>
+            <!-- <img src="views/img/intro/F-compartir.png" width="150px"/> -->
+        </div>
+    </center>
+    <h1>Lo lograste<br/>
+        <span id="puntajeNivel">0 pts</span>
+    </h1>
+    <ul>
+        <li>
+            <h3>Monedas</h3>
+            <div id="spriteMonedasFinal"></div>
+            <h4 id="totalMonedasNivel">
+                <span id="spnMonedasRecogidas">100</span> pts
+            </h4> 
+        </li>
+        <li>
+            <h3>Energía</h3>
+            <meter id="energiaFinal" min="0" max="100" value="100" high="40" style="margin-top:40px"></meter>
+            <span id="spnTotalEnergia">100%</span>
+            <h4 id="puntosEnergia" style="margin-top:20px">
+                <span id="spnPuntosEnergia">100</span> pts
+            </h4> 
+        </li>
+        <li>
+            <h3>Vidas</h3>
+                <ol>
+                    <li id="vidaFinal1"><img src="views/img/utileria/vidas.png"/></li>
+                    <li id="vidaFinal2"><img src="views/img/utileria/vidas.png"/></li>
+                    <li id="vidaFinal3"><img src="views/img/utileria/vidas.png"/></li>
+                </ol>            
+            <h4 id="puntosVidas"><span id="spnPtsVida">100</span> pts</h4> 
+        </li>
+    </ul>
+
+</div>
+<!-- ***********************************
+SONIDOS
+************************************ -->
+<audio id="sBackground01" class="sonidos" src="views/mp3/double dragon/01_Double Dragon (Opening Theme).mp3" type="audio/mpeg" muted></audio>
+<audio id="sBackground02" class="sonidos" src="views/mp3/double dragon/02_Slums (Arrival of the Black Warriors).mp3" type="audio/mpeg" muted></audio>
+<audio id="sBackground03" class="sonidos" src="views/mp3/double dragon/06_Industrial Area (Riot).mp3" type="audio/mpeg" muted></audio>
+<audio id="sColisionBalasEnemigo" class="sonidos" src="views/mp3/colisionBalasEnemigo.mp3" type="audio/mpeg" muted></audio>
+<audio id="sColisionTrampasEnemigos" class="sonidos" src="views/mp3/colisionTrampas-Enemigos.mp3" type="audio/mpeg" muted></audio>
+<audio id="sDisparoEnemigo" class="sonidos" src="views/mp3/disparoEnemigo.mp3" type="audio/mpeg" muted></audio>
+<audio id="sDisparoJugador" class="sonidos" src="views/mp3/disparoJugador.mp3" type="audio/mpeg" muted></audio>
+<audio id="sEnergia" class="sonidos" src="views/mp3/energia.mp3" type="audio/mpeg" muted></audio>
+<audio id="sGanar" class="sonidos" src="views/mp3/double dragon/04_Mission Complete.mp3" type="audio/mpeg" muted></audio>
+<audio id="sMonedas" class="sonidos" src="views/mp3/monedas.mp3" type="audio/mpeg" muted></audio>
+<audio id="sMonedero" class="sonidos" src="views/mp3/monedero.mp3" type="audio/mpeg" muted></audio>
+<audio id="sPerder" class="sonidos" src="views/mp3/double dragon/09_Reunion with Marian (Ending Theme).mp3" type="audio/mpeg" muted></audio>
+<audio id="sPerderVida" class="sonidos" src="views/mp3/perderVida.mp3" type="audio/mpeg" muted></audio>
+<audio id="sPuntos" class="sonidos" src="views/mp3/puntos.mp3" type="audio/mpeg" muted></audio>
+<audio id="sSaltoJugador" class="sonidos" src="views/mp3/saltoJugador.mp3" type="audio/mpeg" muted></audio>
 
 

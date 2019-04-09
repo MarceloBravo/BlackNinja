@@ -59,12 +59,13 @@ var datos = {
     posicionMonedas:[],
     monedasColisionadas:[],
     contadorMonedas:0,
+    contadorMonedasNivel: 0,
     
     imgTrampas:[],
     posicionTrampas:[],        
     movTrampa:-1,
     cambioMovTrampa:false, 
-    energiaTrampa:0.1,
+    energiaTrampa:.5,
     
     imgEnemigos:null,
     posicionEnemigos:[],
@@ -74,7 +75,7 @@ var datos = {
     movBalasEnemigos:0,
     velocidadBalasEnemigos:5,
     cicloDisparoEnemigos:0,
-    energiaBalas:0.3, 
+    energiaBalas:1, 
 
     disparo: false,
     imgDisparoJugador:[],
@@ -91,9 +92,36 @@ var datos = {
     direccionJugador: "der",
     disparoActivado:true,
 
-    energia:0,
+    energia:100,
     vida:3, 
 
-    gameOver: false
+    gameOver: false,
+
+    puntajeTotal:0,
+    puntajeNivel:0,
+    penalizacionEnergia: 0,
+    penalizacionVidas: 0,
+    incrementoPuntaje: 0
 };
 
+/* *********************************
+ * VARIABLES DEL SONIDO
+ ********************************* */
+var sonidos = {
+    sBackground01:null,
+    sBackground02:null,
+    sBackground03:null,
+    sColisionBalasEnemigo:null,
+    sColisionTrampasEnemigos:null,
+    sDisparoEnemigo:null,
+    sDisparoJugador:null,
+    sEnergia:null,
+    sGanar:null,
+    sMonedas:null,
+    sMonedero:null,
+    sPerder:null,
+    sPerderVida:null,
+    sPuntos:null,
+    sSaltoJugador:null,
+    listaSonidos:[]
+};

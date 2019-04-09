@@ -29,12 +29,44 @@ var inicio = {
         }
     },
 
+    
     /* **********************
      * ELEGIR NIVEL
      ********************* */
     elegirNivel: function (e) {  
         datos.nivel = e.getAttribute("nivel");
         datos.id = e.getAttribute("id");
+        
+        /* **********************
+        * SONIDOS
+        ********************* */
+        sonidos.sBackground01 = document.getElementById("sBackground01");
+        sonidos.sBackground02 = document.getElementById("sBackground02");
+        sonidos.sBackground03 = document.getElementById("sBackground03");
+        sonidos.sColisionBalasEnemigo = document.getElementById("sColisionBalasEnemigo");
+        sonidos.sColisionTrampasEnemigos = document.getElementById("sColisionTrampasEnemigos");
+        sonidos.sDisparoEnemigo = document.getElementById("sDisparoEnemigo");
+        sonidos.sDisparoJugador = document.getElementById("sDisparoJugador");
+        sonidos.sEnergia = document.getElementById("sEnergia");
+        sonidos.sGanar = document.getElementById("sGanar");
+        sonidos.sMonedas = document.getElementById("sMonedas");
+        sonidos.sMonedero = document.getElementById("sMonedero");
+        sonidos.sPerder = document.getElementById("sPerder");
+        sonidos.sPerderVida = document.getElementById("sPerderVida");
+        sonidos.sPuntos = document.getElementById("sPuntos");
+        sonidos.sSaltoJugador = document.getElementById("sSaltoJugador");
+
+        sonidos.listaSonidos = document.getElementsByClassName("sonidos");
+
+        for(var i=sonidos.listaSonidos.length-1; i>=0 ; i--){
+            
+            sonidos.listaSonidos[i].play();
+            sonidos.listaSonidos[i].pause();
+            sonidos.listaSonidos[i].muted = false;
+
+            
+        }
+
         inicio.inicioDeNiveles(datos.nivel);
     },
 
@@ -45,6 +77,16 @@ var inicio = {
     
     inicioDeNiveles: function (nivel) {        
         document.getElementById("inicio").parentNode.removeChild(document.getElementById("inicio"));
+        datos.nivel = nivel;
+        inicio.preparaNiveles();
+    },
+
+    siguienteNivel: function(){
+        datos.nivel++;        
+        inicio.preparaNiveles();
+    },
+
+    preparaNiveles: function(){
         canvas = document.getElementById("lienzo");
         ctx = canvas.getContext("2d");
 
@@ -53,7 +95,7 @@ var inicio = {
          * PLANO 3
          ********************************* */
         datos.plano3 = new Image();
-        datos.plano3.src = "views/img/nivel" + nivel + "/plano3.png";
+        datos.plano3.src = "views/img/nivel" + datos.nivel + "/plano3.png";
         /*
          * plano3.onload fue definido en ésta sección con el fín de maquetar el escenario, pero una vés 
          * dibujado el escenario, el código del plano se comenta y es trasladado al archivo lienzo.js
@@ -70,7 +112,7 @@ var inicio = {
          * PLANO 2
          ********************************* */
         datos.plano2 = new Image();
-        datos.plano2.src = "views/img/nivel" + nivel + "/plano2.png";
+        datos.plano2.src = "views/img/nivel" + datos.nivel + "/plano2.png";
         /*
          * plano2.onload fue definido en ésta sección con el fín de maquetar el escenario, pero una vés 
          * dibujado el escenario, el código del plano se comenta y es trasladado al archivo lienzo.js
@@ -86,7 +128,7 @@ var inicio = {
          * PLANO 1
          ********************************* */
         datos.plano1 = new Image();
-        datos.plano1.src = "views/img/nivel" + nivel + "/plano1.png";
+        datos.plano1.src = "views/img/nivel" + datos.nivel + "/plano1.png";
         /*
          * plano1.onload fue definido en ésta sección con el fín de maquetar el escenario, pero una vés 
          * dibujado el escenario, el código del plano se comenta y es trasladado al archivo lienzo.js
@@ -105,11 +147,12 @@ var inicio = {
          * BLOQUES
          ********************************* */
         datos.texturaPlataforma = new Image();
-        datos.texturaPlataforma.src = "views/img/nivel" + nivel + "/texturaPlataforma.jpg";
+        datos.texturaPlataforma.src = "views/img/nivel" + datos.nivel + "/texturaPlataforma.jpg";
         
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "views/js/json/nivel"+nivel+"/bloques.json", true);
+        xhr.open("GET", "views/js/json/nivel"+datos.nivel+"/bloques.json", true);
         xhr.send();
+        datos.bloques = [];
         
         xhr.onreadystatechange = function(){
            if((xhr.readyState == 4) && (xhr.status == 200)){
@@ -122,7 +165,7 @@ var inicio = {
          * PLANO 0
          ********************************* */
         datos.plano0 = new Image();
-        datos.plano0.src = "views/img/nivel" + nivel + "/plano0.png";
+        datos.plano0.src = "views/img/nivel" + datos.nivel + "/plano0.png";
         /*
          * plano0.onload fue definido en ésta sección con el fín de maquetar el escenario, pero una vés 
          * dibujado el escenario, el código del plano se comenta y es trasladado al archivo lienzo.js
@@ -156,15 +199,16 @@ var inicio = {
          * DETALLES
          ********************************* */
         datos.detalles = new Image();
-        datos.detalles.src = "views/img/nivel"+nivel+"/detalles.png";
+        datos.detalles.src = "views/img/nivel"+datos.nivel+"/detalles.png";
         
         
         /* *********************************
          * BLOQUES DETALLES
          ********************************* */
         var xhrPosDetalles = new XMLHttpRequest();
-        xhrPosDetalles.open("GET", "views/js/json/nivel"+nivel+"/posicionDetalles.json", true);
+        xhrPosDetalles.open("GET", "views/js/json/nivel"+datos.nivel+"/posicionDetalles.json", true);
         xhrPosDetalles.send();
+        datos.posDetalles = [];
         
         xhrPosDetalles.onreadystatechange = function(){
            if((xhrPosDetalles.readyState == 4) && (xhrPosDetalles.status == 200)){
@@ -198,8 +242,9 @@ var inicio = {
          * BLOQUES DETALLES
          ********************************* */
         var xhrPlataforma = new XMLHttpRequest();
-        xhrPlataforma.open("GET", "views/js/json/nivel"+nivel+"/plataforma.json", true);
+        xhrPlataforma.open("GET", "views/js/json/nivel"+datos.nivel+"/plataforma.json", true);
         xhrPlataforma.send();
+        datos.plataforma = [];
         
         xhrPlataforma.onreadystatechange = function(){
            if((xhrPlataforma.readyState == 4) && (xhrPlataforma.status == 200)){
@@ -212,9 +257,10 @@ var inicio = {
          * MONEDAS
          ********************************* */
         var xhrPosMonedas = new XMLHttpRequest();
-        xhrPosMonedas.open("GET", "views/js/json/nivel"+nivel+"/posicion_monedas.json", true);
+        xhrPosMonedas.open("GET", "views/js/json/nivel"+datos.nivel+"/posicion_monedas.json", true);
         xhrPosMonedas.send();
-        
+        datos.posicionMonedas = [];
+        datos.imgMonedas = [];
         xhrPosMonedas.onreadystatechange = function(){
            if((xhrPosMonedas.readyState == 4) && (xhrPosMonedas.status == 200)){
                datos.posicionMonedas = JSON.parse(xhrPosMonedas.responseText);
@@ -233,8 +279,10 @@ var inicio = {
          * TRAMPAS
          ********************************* */
         var xhrPosTrampas = new XMLHttpRequest();
-        xhrPosTrampas.open("GET", "views/js/json/nivel"+nivel+"/posicion_trampas.json", true);
+        xhrPosTrampas.open("GET", "views/js/json/nivel"+datos.nivel+"/posicion_trampas.json", true);
         xhrPosTrampas.send();
+        datos.posicionTrampas = [];
+        datos.imgTrampas = [];
         
         xhrPosTrampas.onreadystatechange = function(){
            if((xhrPosTrampas.readyState == 4) && (xhrPosTrampas.status == 200)){
@@ -251,11 +299,14 @@ var inicio = {
          * ENEMIGOS
          ********************************* */
         var xhrPosEnemigos = new XMLHttpRequest();
-        xhrPosEnemigos.open("GET", "views/js/json/nivel"+nivel+"/posicion_enemigos.json", true);
+        xhrPosEnemigos.open("GET", "views/js/json/nivel"+datos.nivel+"/posicion_enemigos.json", true);
         xhrPosEnemigos.send();
         
         datos.imgEnemigos = new Image();
         datos.imgEnemigos.src = "views/img/utileria/enemigos.png";
+
+        datos.posicionEnemigos = [];
+        datos.imgBalasEnemigos = [];
 
         xhrPosEnemigos.onreadystatechange = function(){
            if((xhrPosEnemigos.readyState == 4) && (xhrPosEnemigos.status == 200)){
@@ -275,7 +326,6 @@ var inicio = {
          ********************************* */   
         datos.imgJugador = new Image();
         datos.imgJugador.src = "views/img/jugador/stop_right.png";
-        datos.energia = 100;
         /*
          * El código de jugador es traladado al archivo lienzo.js
          * 
@@ -326,6 +376,9 @@ var inicio = {
                 document.getElementById("btnAmpliar").style.display = "block";
                 document.getElementById("btnFullScreen").style.display = "block";
                 document.getElementById("tablero").style.display = "block";
+                
+                datos.contadorMonedasNivel = 0;
+                datos.penalizacionVidas = 0;
 
                 datos.gameOver = false;
                 
