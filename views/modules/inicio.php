@@ -10,6 +10,7 @@
 ?>
 <div id="inicio">
     <div id="cerrarSesion"><a href="salir">Cerrar Sesión</a></div>
+    <!-- <div id="cerrarSesion" onclick="inicio.cerrarSesionFacebook()">Cerrar Sesión</div> -->
     <h2 id="saludo">!Hola <?php echo $_SESSION['usuario']['nombre'] ?><img style="border-radius: 100%; margin-left:  10px" width="30px" src="<?php echo $_SESSION['usuario']['foto'] ?>">Bienvenid@</h2>
     
     <!-- ***************************** 
@@ -125,11 +126,11 @@ TABLERO
     AUDIO
     ************************************ -->
     <div id="controlVolumen">
-            <p>VOLUMEN: </P>
+            <p onclick="juego.volumen(this)" id="lblVolumen" volumen="0">VOLUMEN: </P>
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li onclick="juego.volumen(this)" class="volumen" volumen="0.3"></li>
+                <li onclick="juego.volumen(this)" class="volumen" volumen="0.6"></li>
+                <li onclick="juego.volumen(this)" class="volumen" volumen="1"></li>
             </ul>
     </div>
     <!-- ***********************************
@@ -162,8 +163,8 @@ FINAL NIVEL
 ************************************ -->
 <div id="final">
     <center>
-        <div>
-            <!-- <img src="views/img/intro/F-compartir.png" width="150px"/> -->
+        <div id="btnCompartir" onclick="inicio.compartirFacebook(this)" nombreJugador="<?php echo $_SESSION['usuario']['nombre'] ?>">
+            <img src="views/img/intro/f-compartir.jpg" width="150px"/>
         </div>
     </center>
     <h1>Lo lograste<br/>
@@ -214,6 +215,7 @@ SONIDOS
 <audio id="sPerder" class="sonidos" src="views/mp3/double dragon/09_Reunion with Marian (Ending Theme).mp3" type="audio/mpeg" muted></audio>
 <audio id="sPerderVida" class="sonidos" src="views/mp3/perderVida.mp3" type="audio/mpeg" muted></audio>
 <audio id="sPuntos" class="sonidos" src="views/mp3/puntos.mp3" type="audio/mpeg" muted></audio>
+<audio id="sResumenPuntaje" class="sonidos" src="views/mp3/double dragon/05_Departure (Intermission).mp3" type="audio/mpeg" muted></audio>
 <audio id="sSaltoJugador" class="sonidos" src="views/mp3/saltoJugador.mp3" type="audio/mpeg" muted></audio>
 
 

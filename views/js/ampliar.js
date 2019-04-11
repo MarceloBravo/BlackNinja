@@ -8,6 +8,9 @@ var lienzoCanvas = document.getElementById("lienzo");
 var btnAmpliar = document.getElementById("btnAmpliar");
 var btnFullScreen = document.getElementById("btnFullScreen");
 var tablero = document.getElementById("tablero");
+var carga = document.getElementById("carga");
+var fina = document.getElementById("final");
+var gameOver = document.getElementById("gameOver");
 
 document.onfullscreenchange  = function(){
     screen.onFullScreenChange();
@@ -38,8 +41,17 @@ var screen = {
         } else if (elem.msRequestFullscreen) { /* IE/Edge */
             elem.msRequestFullscreen();
         }
-
+        
+        /* ***************************************************
+        CONFIGURANDO LA PANTALLA CONPLETA PARA DISPOSITIVOS TOUCH
+        *************************************************** */
+        if(screenfull.enabled){
+            screenfull.request(elem);
+        }
+        window.addEventListener("load",function(){window, scrollTo(0,0);});
+        document.addEventListener("touchmove", function(e){e.preventDefault();});
     },
+
 
     ampliarJuego: function () {
         contenedor.style.width = "100%";
@@ -61,6 +73,15 @@ var screen = {
         btnFullScreen.style.left = "calc(100% - 210px)";
         btnFullScreen.style.position = "absolute";
 
+        carga.style.width = "100%";
+        carga.style.height = "100vh";
+
+        final.style.width = "100%";
+        final.style.height = "100vh";
+        
+        gameOver.style.width = "100%";
+        gameOver.style.height = "100vh";
+
         btnAmpliar.setAttribute("onclick", "screen.reducirJuego()");
     },
 
@@ -81,6 +102,15 @@ var screen = {
         btnFullScreen.style.left = "79%";
         btnFullScreen.style.position = "relative";
         
+        carga.style.width = "1000px";
+        carga.style.height = "500px";
+
+        final.style.width = "1000px";
+        final.style.height = "500px";
+
+        gameOver.style.width = "1000px";
+        gameOver.style.height = "500px";
+
         btnAmpliar.setAttribute("onclick", "screen.ampliarJuego()");
     }
 };

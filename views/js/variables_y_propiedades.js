@@ -101,7 +101,26 @@ var datos = {
     puntajeNivel:0,
     penalizacionEnergia: 0,
     penalizacionVidas: 0,
-    incrementoPuntaje: 0
+    incrementoPuntaje: 0,
+
+    /* *********************************
+    * IMÁGENES
+    ********************************* */
+   imgColisionTrampa: null,
+   imgJumpLeft: null,
+   imgJumpRght: null,
+   imgRunLefth: null,
+   imgRunRight: null,
+   imgStopLeft: null,
+   imgStopRight: null,
+   imgColisionesBalas: null,
+   imgColisionesBalasEnemigos: null,
+   imgColisionesMonedas: null,
+   imgColisionesTrampas: null,
+   img_monedas: null,
+   img_trampas: null,
+   imgBalasJugador: null,
+   imgDisparoEnemigos: null
 };
 
 /* *********************************
@@ -123,5 +142,6 @@ var sonidos = {
     sPerderVida:null,
     sPuntos:null,
     sSaltoJugador:null,
+    sResumenPuntaje:null,
     listaSonidos:[]
 };

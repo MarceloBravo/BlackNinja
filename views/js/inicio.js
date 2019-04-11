@@ -2,15 +2,18 @@
  * OBJETOS
  ************************************** */
 var inicio = {
-    /* **********************
-     * MÉTODOS
-     ********************* */
-    iniciar: function () {        
-        var identificador = "111111111";
+    ocultarMsgTouch: function(){
+        var obj = document.getElementById("loginTouch");
+        obj.parentNode.removeChild(obj);
+    },
+
+    iniciar: function(){
+        
+        var identificador = "mabc@live.cl";
         var nombre = "Marcelo Bravo";
         var foto = "views/img/intro/pedro.png";
 
-        /*utilizando ajax nativo de javascript*/
+        //utilizando ajax nativo de javascript
         var xhr = new XMLHttpRequest();
         var url = "views/ajax/usuarios.php";
         xhr.open("POST", url, true);
@@ -27,46 +30,100 @@ var inicio = {
                 }
             }
         }
+        
     },
 
-    
+
+    /* **********************
+     * INICIAR CON FACEBOOK
+     ********************* */
+    iniciarFacebook: function () {        
+
+        FB.login( function(response){validarUsuario();}, {scope: 'public_profile, email'} );
+
+
+        function validarUsuario(){
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+
+
+        function statusChangeCallback(response){
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else {
+                // The person is not logged into your app or we are unable to tell.
+                document.getElementById('ingresoFacebook').innerHTML = '<div style="color: white; text-align:center"> ¡Vuelve a intentarlo!</div>';
+            }
+        }
+
+
+        function testAPI(){
+            FB.api('/me?fields=id, name, first_name, last_name, email, picture', function(response) {
+                var xhr = new XMLHttpRequest();        
+                var identificador = response.email;
+                var nombre = response.name;
+                var foto = "http://graph.facebook.com/"+response.id+"/picture?type=large";
+                var url = "views/ajax/usuarios.php";
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("identificador=" + identificador + "&nombre=" + nombre + "&foto=" + foto);
+
+                xhr.onreadystatechange = function () {
+                    if ((xhr.readyState == 4) && (xhr.status == 200)) {
+                        //console.log(xhr.responseText);
+                        if (xhr.responseText == "ok") {
+                            window.location = "inicio";
+                        }else{
+                            alert(xhr.responseText);
+                        }
+                    }
+                }
+              });
+        }
+    },
+
+    /* **********************
+     * CERRAR SESSION CON FACEBOOK (Habilitar el botón de cesrrar sesion en incio.php)
+     ********************* */
+    cesrrarSesionFacebook: function(){
+        FB.getLoginStatus(function(response){
+            if(response.status === "connected"){
+                FB.logout(function(response){
+                    setTimeout(function(){
+                        window.location = "salir";
+                    }, 500);
+                    
+                });
+            }else{
+
+            }
+        });
+    },
+
+    /* **********************
+     * COMPARTIR EN FACEBOOK 
+     ********************* */
+    compartirFacebook: function(e){
+        var jugador = e.getAttribute('nombreJugador');
+        FB.ui({
+            method: 'share',
+            display: 'popup',
+            quote: '¡'+jugador+' ha ganado '+datos.sResumenPuntaje+' pts en el nivel '+datos.nivel+' en el juego Black Nija.',
+            link: 'http://mabc.byethost9.com/blackninja'
+          }, function(response){});
+    },
+
     /* **********************
      * ELEGIR NIVEL
      ********************* */
-    elegirNivel: function (e) {  
+    elegirNivel: function (e) {
         datos.nivel = e.getAttribute("nivel");
         datos.id = e.getAttribute("id");
         
-        /* **********************
-        * SONIDOS
-        ********************* */
-        sonidos.sBackground01 = document.getElementById("sBackground01");
-        sonidos.sBackground02 = document.getElementById("sBackground02");
-        sonidos.sBackground03 = document.getElementById("sBackground03");
-        sonidos.sColisionBalasEnemigo = document.getElementById("sColisionBalasEnemigo");
-        sonidos.sColisionTrampasEnemigos = document.getElementById("sColisionTrampasEnemigos");
-        sonidos.sDisparoEnemigo = document.getElementById("sDisparoEnemigo");
-        sonidos.sDisparoJugador = document.getElementById("sDisparoJugador");
-        sonidos.sEnergia = document.getElementById("sEnergia");
-        sonidos.sGanar = document.getElementById("sGanar");
-        sonidos.sMonedas = document.getElementById("sMonedas");
-        sonidos.sMonedero = document.getElementById("sMonedero");
-        sonidos.sPerder = document.getElementById("sPerder");
-        sonidos.sPerderVida = document.getElementById("sPerderVida");
-        sonidos.sPuntos = document.getElementById("sPuntos");
-        sonidos.sSaltoJugador = document.getElementById("sSaltoJugador");
-
-        sonidos.listaSonidos = document.getElementsByClassName("sonidos");
-
-        for(var i=sonidos.listaSonidos.length-1; i>=0 ; i--){
-            
-            sonidos.listaSonidos[i].play();
-            sonidos.listaSonidos[i].pause();
-            sonidos.listaSonidos[i].muted = false;
-
-            
-        }
-
+        
         inicio.inicioDeNiveles(datos.nivel);
     },
 
@@ -77,16 +134,86 @@ var inicio = {
     
     inicioDeNiveles: function (nivel) {        
         document.getElementById("inicio").parentNode.removeChild(document.getElementById("inicio"));
-        datos.nivel = nivel;
+        datos.nivel = nivel;        
         inicio.preparaNiveles();
     },
 
     siguienteNivel: function(){
-        datos.nivel++;        
+        datos.nivel++;     
+        
+        screen.fullScreen();
+
         inicio.preparaNiveles();
     },
 
     preparaNiveles: function(){
+        /* *********************************
+        * PRECARGA DE IMÁGENES
+        ********************************* */
+       datos.imgColisionTrampa =  new Image();
+       datos.imgJumpLeft =  new Image();
+       datos.imgJumpRight = new Image();
+       datos.imgRunLefth = new Image();
+       datos.imgRunRight = new Image();
+       datos.imgStopLeft = new Image();
+       datos.imgStopRight = new Image();
+       datos.imgColisionesBalas = new Image();
+       datos.imgColisionesBalasEnemigos = new Image();
+       datos.imgColisionesMonedas = new Image();
+       datos.imgColisionesTrampas = new Image();
+       datos.img_monedas = new Image();
+       datos.img_trampas = new Image();
+       datos.imgBalasJugador = new Image();
+       datos.imgDisparoEnemigos = new Image();
+
+       datos.imgColisionTrampa.src = "views/img/jugador/colision_trampa.png";
+       datos.imgJumpLeft.src = "views/img/jugador/jump_left.png";
+       datos.imgJumpRight.src = "views/img/jugador/jump_right.png";
+       datos.imgRunLefth.src = "views/img/jugador/run_left.png";
+       datos.imgRunRight.src = "views/img/jugador/run_right.png";
+       datos.imgStopLeft.src = "views/img/jugador/stop_left.png";
+       datos.imgStopRight.src = "views/img/jugador/stop_right.png";
+       datos.imgColisionesBalas.src = "views/img/utileria/colisionesBalas.png";
+       datos.imgColisionesBalasEnemigos.src = "views/img/utileria/colisionesBalasEnemigos.png";
+       datos.imgColisionesMonedas.src = "views/img/utileria/colisionesMonedas.png";
+       datos.imgColisionesTrampas.src = "views/img/utileria/colisionesTrampas.png";
+       datos.img_monedas.src = "views/img/utileria/monedas.png";
+       datos.img_trampas.src = "views/img/utileria/trampas.png";
+       datos.imgBalasJugador.src = "views/img/utileria/balasJugador.png";
+       datos.imgDisparoEnemigos.src = "views/img/utileria/balasEnemigos.png";
+
+       /* **********************
+        * PRECARGA DE SONIDOS
+        ********************* */
+       sonidos.sBackground01 = document.getElementById("sBackground01");
+       sonidos.sBackground02 = document.getElementById("sBackground02");
+       sonidos.sBackground03 = document.getElementById("sBackground03");
+       sonidos.sColisionBalasEnemigo = document.getElementById("sColisionBalasEnemigo");
+       sonidos.sColisionTrampasEnemigos = document.getElementById("sColisionTrampasEnemigos");
+       sonidos.sDisparoEnemigo = document.getElementById("sDisparoEnemigo");
+       sonidos.sDisparoJugador = document.getElementById("sDisparoJugador");
+       sonidos.sEnergia = document.getElementById("sEnergia");
+       sonidos.sGanar = document.getElementById("sGanar");
+       sonidos.sMonedas = document.getElementById("sMonedas");
+       sonidos.sMonedero = document.getElementById("sMonedero");
+       sonidos.sPerder = document.getElementById("sPerder");
+       sonidos.sPerderVida = document.getElementById("sPerderVida");
+       sonidos.sPuntos = document.getElementById("sPuntos");
+       sonidos.sSaltoJugador = document.getElementById("sSaltoJugador");
+       sonidos.sResumenPuntaje = document.getElementById("sResumenPuntaje");
+
+       sonidos.listaSonidos = document.getElementsByClassName("sonidos");
+
+       for(var i=sonidos.listaSonidos.length-1; i>=0 ; i--){
+           
+           sonidos.listaSonidos[i].play();
+           sonidos.listaSonidos[i].pause();
+           sonidos.listaSonidos[i].muted = false;
+
+           
+       }
+
+
         canvas = document.getElementById("lienzo");
         ctx = canvas.getContext("2d");
 
@@ -267,7 +394,7 @@ var inicio = {
                
                for(var i=0; i<datos.posicionMonedas.length; i++){
                    datos.imgMonedas[i] = new Image();
-                   datos.imgMonedas[i].src = "views/img/utileria/monedas.png";
+                   datos.imgMonedas[i].src = datos.img_monedas.src;
                }
            }
         };
@@ -290,7 +417,7 @@ var inicio = {
                
                for(var i=0; i<datos.posicionTrampas.length; i++){
                    datos.imgTrampas[i] = new Image();
-                   datos.imgTrampas[i].src = "views/img/utileria/trampas.png";
+                   datos.imgTrampas[i].src = datos.img_trampas.src;
                }
            }
         };
@@ -314,7 +441,7 @@ var inicio = {
                datos.posicionBalasEnemigos = JSON.parse(xhrPosEnemigos.responseText);   //Las balas de los enemigos inician desde la misma posición de los enemigos 
                datos.posicionBalasEnemigos.forEach(function(elem, index){
                     datos.imgBalasEnemigos[index] = new Image();
-                    datos.imgBalasEnemigos[index].src = "views/img/utileria/balasEnemigos.png";
+                    datos.imgBalasEnemigos[index].src = datos.imgDisparoEnemigos.src;
                });
            }
         };
@@ -353,7 +480,12 @@ var inicio = {
          * PRELOAD
          ********************************* */
 
-        var cargarArchivo = [datos.plano0, datos.texturaPlataforma, datos.detalles, datos.plano1, datos.plano2, datos.plano3, datos.imgJugador, datos.imgEnemigos];
+        var cargarArchivo = [datos.plano0, datos.texturaPlataforma, datos.detalles, datos.plano1, 
+            datos.plano2, datos.plano3, datos.imgJugador, datos.imgEnemigos, datos.imgDisparoEnemigos,
+            datos.imgColisionTrampa, datos.imgJumpLeft, datos.imgJumpRight, datos.imgRunLefth,
+            datos.imgRunRight, datos.imgStopLeft, datos.imgStopRight, datos.imgColisionesBalas, 
+            datos.imgColisionesBalasEnemigos, datos.imgColisionesMonedas, datos.imgColisionesTrampas, 
+            datos.img_monedas, datos.img_trampas];
         var numeroArchivos = 0;
         var porcentajeCarga = 0;
         

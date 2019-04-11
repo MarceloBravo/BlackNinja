@@ -17,11 +17,12 @@ and open the template in the editor.
     font-family: 'Patrick Hand', cursive;
 }
 
-#contenedor #inicio #cerrarSesion a{
+/* #contenedor #inicio #cerrarSesion a{ */
+#contenedor #inicio #cerrarSesion{
     position: absolute;
     right: 0px;
     text-align: center;
-    color: white;
+    color: white !important;
     top: -25px;
 }
 
@@ -254,6 +255,7 @@ AUDIO
     height: 60px;
     color: white;
     font-size: medium;
+    cursor: pointer;
 }
 
 #controlVolumen p{

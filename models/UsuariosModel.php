@@ -61,7 +61,7 @@ class UsuariosModel{
     */
     static function buscarPorRut($id){
         $stmt = Conexion::conectar()->prepare("SELECT * FROM usuarios WHERE identificador = :id");
-        $stmt->bindParam("id", $id,PDO::PARAM_INT);
+        $stmt->bindParam("id", $id,PDO::PARAM_STR);
         $stmt->execute();
         $resp = $stmt->fetch();
         $stmt->closeCursor();
@@ -73,7 +73,7 @@ class UsuariosModel{
     static function mejoresPuntajes($nivel){
         $ptje = "ptje".$nivel;
         $colNivel = "nivel".$nivel;
-        $stmt = Conexion::conectar()->prepare("SELECT nombre, foto, ".$colNivel.", ".$ptje." FROM usuarios WHERE identificador ORDER BY :ptje DESC LIMIT 3");
+        $stmt = Conexion::conectar()->prepare("SELECT nombre, foto, ".$colNivel.", ".$ptje." FROM usuarios ORDER BY :ptje DESC LIMIT 3");
         //$stmt->bindParam(":nivel",$colNivel, PDO::PARAM_STR);
         $stmt->bindParam(":ptje",$ptje, PDO::PARAM_STR);
         $stmt->execute();
@@ -93,10 +93,10 @@ class UsuariosModel{
     */
     
     static function guardarPuntajes($datos, $tabla){
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET ".$datos['columna_nivel']." = :completado, ".$datos['columna_puntaje']." = :ptje WHERE id = :id");
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET ".$datos['columna_nivel']." = :completado, ".$datos['columna_puntaje']." = :ptje WHERE identificador = :id");
         $stmt->bindParam("completado",$datos['completado'], PDO::PARAM_BOOL);
         $stmt->bindParam("ptje",$datos['puntaje'], PDO::PARAM_INT);
-        $stmt->bindParam("id",$datos['id'], PDO::PARAM_INT);
+        $stmt->bindParam("id",$datos['id'], PDO::PARAM_STR);
         $resp = $stmt->execute(); //Retorna un boolean 
         $stmt->closeCursor();
         return $resp;
@@ -105,8 +105,8 @@ class UsuariosModel{
     
     static function buscarPorId($id, $tabla){
         try{
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id = :id");
-            $stmt->bindParam("id",$id, PDO::PARAM_INT);
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE identificador = :id");
+            $stmt->bindParam("id",$id, PDO::PARAM_STR);
             $stmt->execute();
             $resp = $stmt->fetch();
             $stmt->closeCursor();

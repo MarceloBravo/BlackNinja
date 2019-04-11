@@ -123,6 +123,10 @@ FINAL NIVEL
     color: white;
 }
 
+#btnCompartir{
+    cursor: pointer;
+}
+
 #final h1{
     margin-top: 2px;
     text-align: center;
