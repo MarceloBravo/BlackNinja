@@ -74,6 +74,7 @@ var lienzo = {
          * BALAS ENEMIGOS
          ************************** */
         for(var i=0; i<datos.posicionBalasEnemigos.length; i++){
+            try{
             ctx.drawImage(
                     datos.imgBalasEnemigos[i], 
                     0, 0, 100, 100,
@@ -81,6 +82,9 @@ var lienzo = {
                     datos.posicionBalasEnemigos[i].y + 5, 
                     datos.posicionBalasEnemigos[i].ancho - 20, 
                     datos.posicionBalasEnemigos[i].alto - 20);
+            }catch(e){
+                console.log(e);
+            }
         }
 
         /* **************************

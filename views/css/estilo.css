@@ -172,3 +172,114 @@ FINAL NIVEL
 #final ul li ol li img{
     width: 60%;
 }
+
+progress{
+    background: green;
+}
+
+/* *********************************
+CONTROLES DISPOSITIVOS TOUCH
+********************************* */
+#controlesTouch{
+    display: none;
+}
+
+@media only screen and (max-width: 1024px){
+    #btnCompartir{
+        display: none;
+    }
+
+    #energia{
+        left: 200px !important;
+    }
+
+    #barraEnergia{
+        width: 100px !important;
+    }
+
+    #monedas{
+        left: 470px !important;
+    }
+
+    #monedas p{
+        display: none;
+    }
+
+    #controlVolumen{
+        display: none;
+    }
+
+    #btnAmpliar{
+        display: none !important;
+    }
+
+    #btnFullScreen{
+        display: none !important;
+    }
+
+    /* *********************************
+    CONTROLES DISPOSITIVOS TOUCH
+    ********************************* */
+    #btnIzquierda{
+        position: absolute;
+        left: 60px;
+        bottom: 7px;
+        width: 65px;
+        height: 65px;
+        background: url(../img/touch/controlFlecha.svg);
+        background-size: contain;
+    }
+    
+    #btnDerecha{
+        position: absolute;
+        left: 160px;
+        bottom: 7px;
+        width: 65px;
+        height: 65px;
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        background: url(../img/touch/controlFlecha.svg);
+        background-size: contain;
+    }
+
+    #btnSalto{
+        position: absolute;
+        right: 60px;
+        bottom: 7px;
+        width: 65px;
+        height: 65px;
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        background: url(../img/touch/controlFlecha.svg);
+        background-size: contain;
+    }
+
+    #btnDisparo{
+        position: absolute;
+        right: 160px;
+        bottom: 7px;
+        width: 65px;
+        height: 65px;
+        background: url(../img/touch/controlDisparo.svg);
+        background-size: contain;
+    }
+
+    #gameOver h1 {
+        line-height: 290px !important;
+    }
+
+    #final h1 {
+        font-size: 35px !important;
+    }
+
+    #final ul{
+        top: 40% !important;
+    }
+
+    #energiaFinal{
+        width: 90% !important;
+    }
+
+}

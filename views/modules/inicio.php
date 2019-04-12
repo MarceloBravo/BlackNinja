@@ -84,6 +84,16 @@ INICIO
 <div id="btnFullScreen" onclick="screen.fullScreen()">PANTALLA COMPLETA</div>
 
 <!-- ***********************************
+CONTROLES DISPOSITIVOS TOUCH
+************************************ -->
+<div id="controlesTouch">
+    <div id="btnIzquierda"></div>
+    <div id="btnDerecha"></div>
+    <div id="btnDisparo"></div>
+    <div id="btnSalto"></div>    
+</div>
+
+<!-- ***********************************
 TABLERO
 ************************************ -->
 <div id="tablero">
@@ -94,13 +104,13 @@ TABLERO
         <p>VIDAS: </p>
         <ul>
             <li id="vida1">
-                <img src="views/img/utileria/vidas.png"/>
+                <img id="imgVida1" src="views/img/utileria/vidas.png"/>
             </li>
             <li id="vida2">
-                <img src="views/img/utileria/vidas.png"/>
+                <img id="imgVida2" src="views/img/utileria/vidas.png"/>
             </li>
             <li id="vida3">
-                <img src="views/img/utileria/vidas.png"/>
+                <img id="imgVida3" src="views/img/utileria/vidas.png"/>
             </li>
         </ul>
     </div>
@@ -109,7 +119,7 @@ TABLERO
     ************************************ -->
     <div id="energia">
         <p>ENERGÍA: </p>
-        <meter id="barraEnergia" value="100" max="100" min="0" high="40"></meter>
+        <progress id="barraEnergia" value="100" max="100" min="0" high="40"></progress>
         <span id="porcentajeEnergia">100%</span>
     </div>
     <!-- ***********************************
@@ -148,7 +158,7 @@ PRELOAD
 <div id="carga">
     <div id="preload">
         <span id="infoPreload">0%</span>
-        <meter id="medidorPorcentajeCarga" value="0" max="100" high="90"></meter> <!-- high indica en que velor cambiará de color la etiqueta meter -->
+        <progress id="medidorPorcentajeCarga" value="0" max="100" high="90"></progress> <!-- high indica en que velor cambiará de color la etiqueta progress -->
     </div>
 </div>
 <!-- ***********************************
@@ -180,7 +190,7 @@ FINAL NIVEL
         </li>
         <li>
             <h3>Energía</h3>
-            <meter id="energiaFinal" min="0" max="100" value="100" high="40" style="margin-top:40px"></meter>
+            <progress id="energiaFinal" min="0" max="100" value="100" high="40" style="margin-top:40px"></progress>
             <span id="spnTotalEnergia">100%</span>
             <h4 id="puntosEnergia" style="margin-top:20px">
                 <span id="spnPuntosEnergia">100</span> pts
@@ -189,9 +199,9 @@ FINAL NIVEL
         <li>
             <h3>Vidas</h3>
                 <ol>
-                    <li id="vidaFinal1"><img src="views/img/utileria/vidas.png"/></li>
-                    <li id="vidaFinal2"><img src="views/img/utileria/vidas.png"/></li>
-                    <li id="vidaFinal3"><img src="views/img/utileria/vidas.png"/></li>
+                    <li id="vidaFinal1"><img id="imgVidaFinal1" src="views/img/utileria/vidas.png"/></li>
+                    <li id="vidaFinal2"><img id="imgVidaFinal2" src="views/img/utileria/vidas.png"/></li>
+                    <li id="vidaFinal3"><img id="imgVidaFinal3" src="views/img/utileria/vidas.png"/></li>
                 </ol>            
             <h4 id="puntosVidas"><span id="spnPtsVida">100</span> pts</h4> 
         </li>

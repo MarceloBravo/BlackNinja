@@ -15,7 +15,7 @@ class UsuariosModel{
         if($conect){
             try{
                 $stmt = $conect->prepare("INSERT INTO usuarios (identificador, nombre, foto, nivel1, ptje1, nivel2, ptje2, nivel3, ptje3) VALUES (:identificador, :nombre, :foto, :nivel1, :ptje1, :nivel2, :ptje2, :nivel3, :ptje3)"); 
-                $stmt->bindParam(":identificador", $datos['identificador'],PDO::PARAM_INT);
+                $stmt->bindParam(":identificador", $datos['identificador'],PDO::PARAM_STR);
                 $stmt->bindParam(":nombre", $datos['nombre'],PDO::PARAM_STR);
                 $stmt->bindParam(":foto", $datos['foto'],PDO::PARAM_STR);
                 $stmt->bindParam(":nivel1", $datos['nivel1'],PDO::PARAM_STR);

@@ -2,6 +2,17 @@
  * OBJETOS
  ************************************** */
 var inicio = {
+    loginForm: function(){
+        var identificador = document.getElementById("email").value;
+        var nombre = document.getElementById("nombre").value;
+        var foto = "views/img/intro/anonymous.png";
+
+        if(identificador != "" && nombre != "" ){
+            inicio.login(identificador, nombre, foto);
+        }
+        
+    },
+
     ocultarMsgTouch: function(){
         var obj = document.getElementById("loginTouch");
         obj.parentNode.removeChild(obj);
@@ -12,7 +23,11 @@ var inicio = {
         var identificador = "mabc@live.cl";
         var nombre = "Marcelo Bravo";
         var foto = "views/img/intro/pedro.png";
+        inicio.login(identificador, nombre, foto);
+        
+    },
 
+    login: function(identificador, nombre, foto){
         //utilizando ajax nativo de javascript
         var xhr = new XMLHttpRequest();
         var url = "views/ajax/usuarios.php";
@@ -22,7 +37,6 @@ var inicio = {
 
         xhr.onreadystatechange = function () {
             if ((xhr.readyState == 4) && (xhr.status == 200)) {
-                //console.log(xhr.responseText);
                 if (xhr.responseText == "ok") {
                     window.location = "inicio";
                 }else{
@@ -30,7 +44,6 @@ var inicio = {
                 }
             }
         }
-        
     },
 
 
@@ -134,14 +147,21 @@ var inicio = {
     
     inicioDeNiveles: function (nivel) {        
         document.getElementById("inicio").parentNode.removeChild(document.getElementById("inicio"));
-        datos.nivel = nivel;        
+        datos.nivel = nivel; 
+        
+        if(window.matchMedia("(max-width: 1024px)").matches){
+            screen.fullScreen();
+        }
+        
         inicio.preparaNiveles();
     },
 
     siguienteNivel: function(){
         datos.nivel++;     
-        
-        screen.fullScreen();
+                
+        if(window.matchMedia("(max-width: 1024px)").matches){
+            screen.fullScreen();
+        }
 
         inicio.preparaNiveles();
     },
@@ -165,6 +185,7 @@ var inicio = {
        datos.img_trampas = new Image();
        datos.imgBalasJugador = new Image();
        datos.imgDisparoEnemigos = new Image();
+       datos.imgVidaMenos = new Image();
 
        datos.imgColisionTrampa.src = "views/img/jugador/colision_trampa.png";
        datos.imgJumpLeft.src = "views/img/jugador/jump_left.png";
@@ -181,6 +202,7 @@ var inicio = {
        datos.img_trampas.src = "views/img/utileria/trampas.png";
        datos.imgBalasJugador.src = "views/img/utileria/balasJugador.png";
        datos.imgDisparoEnemigos.src = "views/img/utileria/balasEnemigos.png";
+       datos.imgVidaMenos.src = "views/img/jugador/vida_menos.png";
 
        /* **********************
         * PRECARGA DE SONIDOS
@@ -438,11 +460,12 @@ var inicio = {
         xhrPosEnemigos.onreadystatechange = function(){
            if((xhrPosEnemigos.readyState == 4) && (xhrPosEnemigos.status == 200)){
                datos.posicionEnemigos = JSON.parse(xhrPosEnemigos.responseText);
-               datos.posicionBalasEnemigos = JSON.parse(xhrPosEnemigos.responseText);   //Las balas de los enemigos inician desde la misma posición de los enemigos 
-               datos.posicionBalasEnemigos.forEach(function(elem, index){
-                    datos.imgBalasEnemigos[index] = new Image();
-                    datos.imgBalasEnemigos[index].src = datos.imgDisparoEnemigos.src;
-               });
+               datos.posicionBalasEnemigos = JSON.parse(xhrPosEnemigos.responseText);   //Las balas de los enemigos inician desde la misma posición de los enemigos                
+                    datos.posicionBalasEnemigos.forEach(function(elem, index){
+                        datos.imgBalasEnemigos[index] = new Image();
+                        datos.imgBalasEnemigos[index].src = datos.imgDisparoEnemigos.src;
+                });
+            
            }
         };
         
@@ -485,13 +508,14 @@ var inicio = {
             datos.imgColisionTrampa, datos.imgJumpLeft, datos.imgJumpRight, datos.imgRunLefth,
             datos.imgRunRight, datos.imgStopLeft, datos.imgStopRight, datos.imgColisionesBalas, 
             datos.imgColisionesBalasEnemigos, datos.imgColisionesMonedas, datos.imgColisionesTrampas, 
-            datos.img_monedas, datos.img_trampas];
+            datos.img_monedas, datos.img_trampas, datos.imgVidaMenos];
         var numeroArchivos = 0;
         var porcentajeCarga = 0;
         
-        for(var i=0; i < cargarArchivo.length; i++){
-            cargarArchivo[i].addEventListener("load", precarga);
-        }
+            for(var i=0; i < cargarArchivo.length; i++){
+                cargarArchivo[i].addEventListener("load", precarga);
+            }
+        
         
         
         function precarga(e){
@@ -504,22 +528,29 @@ var inicio = {
             
             if(numeroArchivos === cargarArchivo.length){
                 document.getElementById("lienzo").style.display = "block";
-                document.getElementById("carga").style.opacity = 0;
                 document.getElementById("btnAmpliar").style.display = "block";
                 document.getElementById("btnFullScreen").style.display = "block";
                 document.getElementById("tablero").style.display = "block";
-                
-                datos.contadorMonedasNivel = 0;
-                datos.penalizacionVidas = 0;
-
-                datos.gameOver = false;
-                
+                document.getElementById("controlesTouch").style.display = "block";    
                 setTimeout(function(){
-                    document.getElementById("carga").style.display = "none";
-                }, 10);
-                
-                juego.teclado();
-                juego.tiempo();
+                    document.getElementById("final").style.display = "none";
+                    
+                    document.getElementById("carga").style.opacity = 0;
+                    
+                    
+                    datos.contadorMonedasNivel = 0;
+                    datos.penalizacionVidas = 0;
+
+                    datos.gameOver = false;
+                    
+                    setTimeout(function(){
+                        document.getElementById("carga").style.display = "none";
+                    }, 10);
+                    
+                    juego.controlesTouch();
+                    juego.teclado();                
+                    juego.tiempo();      
+                },1500);
                 
             }
         }

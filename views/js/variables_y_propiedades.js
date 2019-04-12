@@ -120,7 +120,8 @@ var datos = {
    img_monedas: null,
    img_trampas: null,
    imgBalasJugador: null,
-   imgDisparoEnemigos: null
+   imgDisparoEnemigos: null,
+   imgVidaMenos: null
 };
 
 /* *********************************

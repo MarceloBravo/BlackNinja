@@ -79,6 +79,10 @@ INGRESO
 .puntajes ul li h2{
     font-weight: 100;
 }
+
+
+
+
 /* ********************************
 PANTALLA VERTICAL
 ******************************** */
@@ -105,12 +109,34 @@ PANTALLA VERTICAL
 
 }
 
+
+/* ********************************
+FORMULARIO DE LOGIN
+******************************** */
+#loginForm{
+	display: none;
+}
+
+#loginForm button{
+	position: relative;
+    width: 100%;
+    padding: 10px 0px 10px 2px;
+    border: none;
+    background: #245799;
+    color: white;
+    font-weight: bold;
+    font-family: "Patrick Hand", cursive;
+}
+
+
 /* **************************
 DISPOSITIVOS TOUCH
 ************************** */
 #loginTouch{
 	display: none;
 }
+
+
 
 @media only screen and (max-width: 1024px){
 	#loginTouch{
@@ -139,4 +165,30 @@ DISPOSITIVOS TOUCH
 		width: 100%;
 		height: 100%;
 	}
+
+	#ingresoFacebook{
+		display: none;
+	}
+
+	/* ********************************
+	FORMULARIO DE LOGIN
+	******************************** */
+	#loginForm{
+		display: block; 
+		position: absolute;
+		width: 300px;
+		top: 280px;
+		left: 50%;
+		padding: 20px;
+		background: rgba(0,0,0,0.5);
+		margin-left: -150px;
+	}
+
+	#loginForm input{
+		padding: 10px;
+		width: 92%;
+		margin: 5px 0;
+		border: 2px solid silver;
+	}
+
 }

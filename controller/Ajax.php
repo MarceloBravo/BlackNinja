@@ -10,7 +10,7 @@ class Ajax{
     
    private $id; //ID USUARIO
    private $identificador; 
-   # ------------------ GESTOSR USUARIOS ------------------
+   # ------------------ GESTOR USUARIOS ------------------
    private $nombre;
    private $foto;
    private $nivel1;
@@ -19,7 +19,7 @@ class Ajax{
    private $ptje2;
    private $nivel3;
    private $ptje3;
-   # ------------------ GESTOSR PUNTAJES ------------------
+   # ------------------ GESTOR PUNTAJES ------------------
    private $nivel;
    private $completado;
    private $puntaje;

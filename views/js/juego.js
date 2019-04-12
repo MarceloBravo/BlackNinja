@@ -27,6 +27,68 @@ var juego = {
 
     },
 
+
+
+    /* **************************
+    * MANEJADOR DE EVENTOS DE CONTROLES TOUCH
+    ************************* */
+    controlesTouch:  function(){
+        document.getElementById("btnIzquierda").addEventListener("touchstart", function(e){
+            e.preventDefault();
+            datos.izquierda = true
+            datos.direccionJugador = "izq";
+        });
+
+        document.getElementById("btnIzquierda").addEventListener("touchend", function(e){
+            e.preventDefault();
+            datos.izquierda = false;
+            datos.imgJugador.src = datos.imgStopLeft.src
+        });
+
+        document.getElementById("btnDerecha").addEventListener("touchstart", function(e){
+            e.preventDefault();
+            datos.derecha = true;
+            datos.direccionJugador = "der";
+        });
+
+        document.getElementById("btnDerecha").addEventListener("touchend", function(e){
+            e.preventDefault();
+            datos.derecha = false;
+            datos.imgJugador.src = datos.imgStopRight.src;
+        });
+
+        document.getElementById("btnSalto").addEventListener("touchstart", function(e){
+            e.preventDefault();
+            datos.salto = true
+            sonidos.sSaltoJugador.play();
+        });
+
+        document.getElementById("btnSalto").addEventListener("touchend", function(e){
+            e.preventDefault();
+            datos.salto = false;            
+        });
+
+        document.getElementById("btnDisparo").addEventListener("touchstart", function(e){
+            e.preventDefault();
+            datos.imgDisparoJugador[datos.imgDisparoJugador.length] = new Image();
+            datos.imgDisparoJugador[datos.imgDisparoJugador.length-1].src = datos.imgBalasJugador.src;                             
+            datos.disparo_x[datos.disparo_x.length] = datos.jugador_x + datos.jugador_ancho / 2;
+            datos.disparo_y[datos.disparo_y.length] = datos.jugador_y + datos.jugador_alto/2;
+            datos.disparo_ancho[datos.disparo_ancho.length] = 15;
+            datos.disparo_alto[datos.disparo_alto.length] = 15;
+            datos.direccionDisparo[datos.direccionDisparo.length] = datos.direccionJugador;
+            datos.disparoActivado = false;
+            sonidos.sDisparoJugador.play();
+        });
+
+        document.getElementById("btnDisparo").addEventListener("touchend", function(e){
+            e.preventDefault();            
+            datos.disparoActivado = true;
+
+        });
+
+    },
+
     oprimir: function (tecla) {
         /* **************************
          * OPRIMIR TECLADO
@@ -141,7 +203,7 @@ var juego = {
         }
         if (datos.reiniciar) {
             //document.getElementById("vida"+datos.vida).style.display = "none";
-            document.getElementById("vida"+datos.vida).innerHTML = "X";
+            document.getElementById("imgVida"+datos.vida).src = datos.imgVidaMenos.src;
             if(datos.vida == 1 ){
                 //JUEGO TERMINADO NO QUEDAN VIDAS
                 juegoTerminado();
@@ -654,10 +716,10 @@ var juego = {
             document.getElementById("puntosEnergia").innerHTML = "-" + Math.round(datos.penalizacionEnergia) + " pts";
             
             if(datos.vida < 3){
-                document.getElementById("vidaFinal3").innerHTML = "X";
+                document.getElementById("imgVidaFinal3").src = datos.imgVidaMenos.src;
             }   
             if(datos.vida < 2){
-                document.getElementById("vidaFinal2").innerHTML = "X";
+                document.getElementById("imgVidaFinal2").src = datos.imgVidaMenos.src;
             }
 
             document.getElementById("spnPtsVida").innerHTML = "-" + datos.penalizacionVidas + " pts";
@@ -729,7 +791,7 @@ var juego = {
                 setTimeout(function(){
                     juego.resetearDatos();                  
                     juego.detenerMusicaDeFondo();
-                    document.getElementById("final").style.display = "none";
+                    
 
                     if(datos.nivel < 3){
                         inicio.siguienteNivel();

@@ -41,7 +41,6 @@
         <script type="text/javascript" src="views/js/lienzo.js"></script>
         
         <script type="text/javascript" src="views/js/screenfull.min.js"></script>
-
     
     </head>
     <body>
@@ -60,14 +59,6 @@
             <?php 
             if(isset($_GET['action'])){
                 include $_GET['action'].".php";
-                /*
-                switch ($_GET['action']){
-                    case "inicio":
-                        include 'inicio.php';
-                    default :
-                        include $_GET['action'].".php";
-                }
-                 */
             }else{
                 include 'ingreso.php'; 
             }
