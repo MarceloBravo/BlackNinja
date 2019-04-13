@@ -29,16 +29,16 @@
         <meta name="shortcut icon" size="196x196" content="views/img/touch/favicon196.png"/>
 
         <link rel="icon" href="views/img/intro/favicon.png">
-        <link href="views/css/estilo.css" type="text/css" rel="stylesheet" media=""> <!-- Para que el juego se adapte a cualquier dispositivo dejar la etiqueta media vacia -->
-        <link href="views/css/ingreso.css" type="text/css" rel="stylesheet" media=""> <!-- Para que el juego se adapte a cualquier dispositivo dejar la etiqueta media vacia -->
-        <link href="views/css/inicio.css" type="text/css" rel="stylesheet" media=""> <!-- Para que el juego se adapte a cualquier dispositivo dejar la etiqueta media vacia -->
+        <link href="views/css/estilo.min.css" type="text/css" rel="stylesheet" media=""> <!-- Para que el juego se adapte a cualquier dispositivo dejar la etiqueta media vacia -->
+        <link href="views/css/ingreso.min.css" type="text/css" rel="stylesheet" media=""> <!-- Para que el juego se adapte a cualquier dispositivo dejar la etiqueta media vacia -->
+        <link href="views/css/inicio.min.css" type="text/css" rel="stylesheet" media=""> <!-- Para que el juego se adapte a cualquier dispositivo dejar la etiqueta media vacia -->
         <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet">  <!-- font-family: 'Patrick Hand SC', cursive; -->
         
-        <script type="text/javascript" src="views/jquery/jquery.js"></script>
-        <script type="text/javascript" src="views/js/variables_y_propiedades.js"></script>
-        <script type="text/javascript" src="views/js/inicio.js"></script>
-        <script type="text/javascript" src="views/js/juego.js"></script>
-        <script type="text/javascript" src="views/js/lienzo.js"></script>
+        <script type="text/javascript" src="views/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="views/js/variables_y_propiedades.min.js"></script>
+        <script type="text/javascript" src="views/js/inicio.min.js"></script>
+        <script type="text/javascript" src="views/js/juego.min.js"></script>
+        <script type="text/javascript" src="views/js/lienzo.min.min.js"></script>
         
         <script type="text/javascript" src="views/js/screenfull.min.js"></script>
     
@@ -57,7 +57,7 @@
         <!-- Contenedor -->
         <div id="contenedor">
             <?php 
-            if(isset($_GET['action'])){
+            if(isset($_GET['action']) && $_GET['action'] != ""){
                 include $_GET['action'].".php";
             }else{
                 include 'ingreso.php'; 
@@ -97,6 +97,6 @@
 </script>
 
     </body>
-    <script type="text/javascript" src="views/js/ampliar.js"></script>
+    <script type="text/javascript" src="views/js/ampliar.min.js"></script>
     
 </html>

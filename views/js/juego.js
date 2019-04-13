@@ -160,23 +160,19 @@ var juego = {
          ************************* */
         lienzo.canvas();
 
-        switch(datos.nivel){
-            case "1":
-            case 1:
-                sonidos.sBackground01.play();
-                sonidos.sBackground01.loop = true;
-                break;
-            case "2":
-            case 2:
-                sonidos.sBackground02.play();
-                sonidos.sBackground02.loop = true;
-                break;
-            case "3":
-            case 3:
-                sonidos.sBackground03.play();
-                sonidos.sBackground03.loop = true;
-                break;
+        if(datos.nivel == "1" || datos.nivel == 1){
+            sonidos.sBackground01.play();
+            sonidos.sBackground01.loop = true;
         }
+        if(datos.nivel == "2" || datos.nivel == 2){
+            sonidos.sBackground02.play();
+            sonidos.sBackground02.loop = true;
+        }
+        if(datos.nivel == "3" || datos.nivel == 3){
+            sonidos.sBackground03.play();
+            sonidos.sBackground03.loop = true;
+        }
+        
         /* **************************
          * MOVIMIENTO TRAMPAS 
          ************************* */
@@ -817,20 +813,9 @@ var juego = {
 
 
     detenerMusicaDeFondo: function(){
-        switch(datos.nivel){
-            case "1":
-            case 1:
-                sonidos.sBackground01.pause();
-                break;
-            case "2":
-            case 2:
-                sonidos.sBackground02.pause();
-                break;
-            case "3":
-            case 3:
-                sonidos.sBackground03.pause();                    
-                break;
-        }
+        if(datos.nivel == "1" || datos.nivel == 1){sonidos.sBackground01.pause();}
+        if(datos.nivel == "2" || datos.nivel == 2){sonidos.sBackground02.pause();}
+        if(datos.nivel == "3" || datos.nivel == 3){sonidos.sBackground03.pause();}
         sonidos.sResumenPuntaje.pause();                
     }
 
