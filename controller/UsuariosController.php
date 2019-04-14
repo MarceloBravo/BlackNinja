@@ -13,7 +13,7 @@ class UsuariosController{
                                 "nombre"=>$datos["nombre"],
                                 "foto"=>$datos["foto"],
                                 "nivel"=>TRUE,
-                                "ptje1"=>100,
+                                "ptje1"=>0,
                                 "nive2"=>false,
                                 "ptje2"=>0,
                                 "nive3"=>false,

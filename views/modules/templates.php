@@ -38,7 +38,7 @@
         <script type="text/javascript" src="views/js/variables_y_propiedades.min.js"></script>
         <script type="text/javascript" src="views/js/inicio.min.js"></script>
         <script type="text/javascript" src="views/js/juego.min.js"></script>
-        <script type="text/javascript" src="views/js/lienzo.min.min.js"></script>
+        <script type="text/javascript" src="views/js/lienzo.min.js"></script>
         
         <script type="text/javascript" src="views/js/screenfull.min.js"></script>
     

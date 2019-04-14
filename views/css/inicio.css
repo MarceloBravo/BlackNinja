@@ -17,13 +17,17 @@ and open the template in the editor.
     font-family: 'Patrick Hand', cursive;
 }
 
-/* #contenedor #inicio #cerrarSesion a{ */
+
 #contenedor #inicio #cerrarSesion{
     position: absolute;
     right: 0px;
     text-align: center;
     color: white !important;
     top: -25px;
+}
+
+#cerrarSesion a{
+    color: white !important;
 }
 
 #contenedor #inicio #saludo{
@@ -39,7 +43,7 @@ and open the template in the editor.
     float: left;
     position: relative;
     width: 33.33%;
-    height: -300px;
+    height: 110px;
     margin-top: 200px;
     text-align: center;
 }

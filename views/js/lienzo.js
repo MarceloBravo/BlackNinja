@@ -143,9 +143,9 @@ var lienzo = {
         /* **************************
          * PLANO 0
          ************************** */
-        ctx.drawImage(datos.plano0, datos.desplazamientoEscenario/2 ,0, datos.plano0.naturalWidth, datos.plano0.naturalHeight);
-        ctx.drawImage(datos.plano0, datos.desplazamientoEscenario/2 + 1000 ,0, datos.plano0.naturalWidth, datos.plano0.naturalHeight);
-        ctx.drawImage(datos.plano0, datos.desplazamientoEscenario/2 + 2000 ,0, datos.plano0.naturalWidth, datos.plano0.naturalHeight);
+        //ctx.drawImage(datos.plano0, datos.desplazamientoEscenario/2 ,0, datos.plano0.naturalWidth, datos.plano0.naturalHeight);
+        //ctx.drawImage(datos.plano0, datos.desplazamientoEscenario/2 + 1000 ,0, datos.plano0.naturalWidth, datos.plano0.naturalHeight);
+        //ctx.drawImage(datos.plano0, datos.desplazamientoEscenario/2 + 2000 ,0, datos.plano0.naturalWidth, datos.plano0.naturalHeight);
 
         
         /* **************************

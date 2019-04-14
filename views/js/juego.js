@@ -158,7 +158,10 @@ var juego = {
         /* **************************
          * LLAMANDO A CANVAS
          ************************* */
+        
         lienzo.canvas();
+        
+
 
         if(datos.nivel == "1" || datos.nivel == 1){
             sonidos.sBackground01.play();
@@ -190,47 +193,7 @@ var juego = {
         }
 
         
-
-        /* **************************
-         * REINICIAR PANTALLA
-         ************************* */
-        if (datos.jugador_y > 500) {
-            datos.reiniciar = true
-        }
-        if (datos.reiniciar) {
-            //document.getElementById("vida"+datos.vida).style.display = "none";
-            document.getElementById("imgVida"+datos.vida).src = datos.imgVidaMenos.src;
-            if(datos.vida == 1 ){
-                //JUEGO TERMINADO NO QUEDAN VIDAS
-                juegoTerminado();
-
-            }else{ 
-                
-                sonidos.sPerderVida.play();
-
-                datos.reiniciar = false;
-                juego.resetearDatos();
-                //datos.contadorMonedas = 0;                    
-                document.getElementById("contadorMonedas").innerHTML = datos.contadorMonedas;
-                datos.vida--;        
-                datos.penalizacionVidas += 10;
-
-                //RESETEANDO LAS PLATAFORMAS
-
-                var xhrPlataforma = new XMLHttpRequest();
-                xhrPlataforma.open("GET", "views/js/json/nivel" + datos.nivel + "/plataforma.json", true);
-                xhrPlataforma.send();
-
-                xhrPlataforma.onreadystatechange = function () {
-                    if ((xhrPlataforma.readyState == 4) && (xhrPlataforma.status == 200)) {
-                        datos.plataforma = JSON.parse(xhrPlataforma.responseText);
-                    }
-                };
-            }
-        }
-
-
-
+        juego.reiniciarPantalla();
 
         /* **************************
          * MOVIMIENTO HORIZONTAL JUGADOR
@@ -724,7 +687,7 @@ var juego = {
             var intervalo = setInterval(function(){
                 if(datos.incrementoPuntaje >= (datos.puntajeTotal + datos.puntajeNivel) ){
                     datos.puntajeTotal += datos.incrementoPuntaje;
-                    document.getElementById("puntajeNivel").innerHTML = "Nivel: " + datos.puntajeNivel + " - Total: " + datos.puntajeTotal + " pts";
+                    document.getElementById("puntajeNivel").innerHTML = "Pts: " + datos.puntajeNivel + " - Total: " + datos.puntajeTotal + " pts.";
                     sonidos.sPuntos.play();
                     sonidos.sMonedero.pause();
                     clearInterval(intervalo);
@@ -738,31 +701,10 @@ var juego = {
                 }else{
                     datos.incrementoPuntaje++;
                     sonidos.sMonedero.play();
-                    document.getElementById("puntajeNivel").innerHTML = "Nivel: " + datos.puntajeNivel + " - Total: " + datos.incrementoPuntaje + " pts";
+                    document.getElementById("puntajeNivel").innerHTML = "Pts: " + datos.puntajeNivel + " - Total: " + datos.incrementoPuntaje + " pts";
                 }
             },16)
 
-            
-
-
-        }
-        
-        /* **************************
-         * GAME OVER
-         ************************* */
-        function juegoTerminado(){
-            cancelAnimationFrame(animacion);
-            document.getElementById("gameOver").style.display = "block";
-            datos.gameOver = true;
-            sonidos.sPerder.play();
-            juego.detenerMusicaDeFondo();
-                 
-            sonidos.sColisionBalasEnemigo.pause();
-            sonidos.sColisionTrampasEnemigos.pause();
-            
-            setTimeout(function(){
-                window.location.reload();
-            },10000)
         }
         
     },
@@ -800,6 +742,88 @@ var juego = {
         };
     },
 
+       
+    
+    reiniciarPantalla: async function(){
+        try{
+
+            /* **************************
+            * REINICIAR PANTALLA
+            ************************* */
+            if (datos.jugador_y > 500) {
+                datos.reiniciar = true
+            }
+            if (datos.reiniciar) {
+                //document.getElementById("vida"+datos.vida).style.display = "none";
+                document.getElementById("imgVida"+datos.vida).src = datos.imgVidaMenos.src;
+                if(datos.vida == 1 ){
+                    //JUEGO TERMINADO NO QUEDAN VIDAS
+                    juegoTerminado();
+
+                }else{ 
+                    //cancelAnimationFrame(animacion);
+                    //await juego.resetearPlataformas();                    
+                    datos.energia = 100;
+                    sonidos.sPerderVida.play();
+                    juego.resetearDatos();
+                    document.getElementById("contadorMonedas").innerHTML = datos.contadorMonedas;
+                    datos.vida--;        
+                    datos.penalizacionVidas += 10;
+                    datos.reiniciar = false;
+                }
+            }
+
+        }catch(e){
+            alert(e);
+        }
+
+        /* **************************
+         * GAME OVER
+         ************************* */
+        function juegoTerminado(){
+            cancelAnimationFrame(animacion);
+            document.getElementById("gameOver").style.display = "block";
+            datos.gameOver = true;
+            sonidos.sPerder.play();
+            juego.detenerMusicaDeFondo();
+                 
+            sonidos.sColisionBalasEnemigo.pause();
+            sonidos.sColisionTrampasEnemigos.pause();
+            
+            setTimeout(function(){
+                window.location.reload();
+            },10000)
+        }
+    },
+
+    /*
+    resetearPlataformas: function(){
+        const promise = new Promise(function(resolve, reject){
+
+            try{
+
+                //RESETEANDO LAS PLATAFORMAS
+
+                var xhrPlataforma = new XMLHttpRequest();
+                xhrPlataforma.open("GET", "views/js/json/nivel" + datos.nivel + "/plataforma.json", true);
+                xhrPlataforma.send();
+
+                xhrPlataforma.onreadystatechange = function () {
+                    if ((xhrPlataforma.readyState == 4) && (xhrPlataforma.status == 200)) {
+                        datos.plataforma = JSON.parse(xhrPlataforma.responseText);
+                        resolve(datos.plataforma);
+                    }
+                };
+
+                
+            }catch(e){
+                reject(e);
+            }
+            return promise;
+        });
+    },
+    */
+
     resetearDatos: function(){
         datos.gravedad = 0;
         datos.jugador_x = 70;
@@ -808,7 +832,7 @@ var juego = {
         datos.desplazamientoEscenario = 0;
         datos.movimientoJugador = 0;
         datos.penalizacionEnergia = 0;  
-        if(datos.energia <= 0){datos.energia = 100;};
+        datos.plataforma = JSON.parse(JSON.stringify(datos.plataformaOrigen));        
     },
 
 

@@ -42,6 +42,7 @@ var datos = {
     velocidadJugador: 5,
     id:null,
     plataforma: null,
+    plataformaOrigen: null,
     
     gravedad:0,
     limiteGravedad:20,

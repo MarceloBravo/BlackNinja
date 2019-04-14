@@ -393,11 +393,12 @@ var inicio = {
         var xhrPlataforma = new XMLHttpRequest();
         xhrPlataforma.open("GET", "views/js/json/nivel"+datos.nivel+"/plataforma.json", true);
         xhrPlataforma.send();
-        datos.plataforma = [];
+        datos.plataformaOrigen = [];
         
         xhrPlataforma.onreadystatechange = function(){
            if((xhrPlataforma.readyState == 4) && (xhrPlataforma.status == 200)){
-               datos.plataforma = JSON.parse(xhrPlataforma.responseText);
+               datos.plataformaOrigen = JSON.parse(xhrPlataforma.responseText);
+               datos.plataforma = JSON.parse(JSON.stringify(datos.plataformaOrigen));
            }
         };
         
