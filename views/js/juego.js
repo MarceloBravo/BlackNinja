@@ -790,9 +790,23 @@ var juego = {
             sonidos.sColisionBalasEnemigo.pause();
             sonidos.sColisionTrampasEnemigos.pause();
             
+            silenciarMusica();
+
             setTimeout(function(){
                 window.location.reload();
             },10000)
+        }
+
+
+        function silenciarMusica(){
+            for(var i=0; i < sonidos.length; i++){
+                if(sonidos[i] != sonidos.listaSonidos){
+                    sonidos[i].muted();
+                }
+            }
+            
+                
+            
         }
     },
 
@@ -842,5 +856,6 @@ var juego = {
         if(datos.nivel == "3" || datos.nivel == 3){sonidos.sBackground03.pause();}
         sonidos.sResumenPuntaje.pause();                
     }
+    
 
 };
