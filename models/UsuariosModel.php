@@ -25,12 +25,8 @@ class UsuariosModel{
                 $stmt->bindParam(":nivel3", $datos['nivel3'],PDO::PARAM_STR);
                 $stmt->bindParam(":ptje3", $datos['ptje3'],PDO::PARAM_INT);
 
-                $resp =  ($stmt->execute());  
-                //$lastId = $conect->lastInsertId();
+                $resp =  ($stmt->execute());
                 $stmt->closeCursor();
-                //if($resp){
-                //    UsuariosModel::grabarNivel($datos, $lastId);
-                //}
             }catch(Exception $e){
                 $resp = false;
             }
